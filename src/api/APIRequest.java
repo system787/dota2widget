@@ -16,7 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by vincenthoang on 8/2/17.
+ * Steam API requests will be handled in this class. To access the API from another class, spawn an APIRequest object.
+ *
+ * For security reasons, this project does not include an API access key to use.
+ * Compiling your own copy of this application will require a Steam Community API access key.
+ * To get one, visit: https://steamcommunity.com/dev/apikey
+ * Create a class named APIKey with a singular method named getAPIKey() that returns a String containing the APIKey.
  */
 public class APIRequest {
     private static final String API_KEY = APIKey.getAPIKey();
@@ -25,6 +30,11 @@ public class APIRequest {
 
     public APIRequest() {}
 
+    /**
+     * Gets the user's display name using their 64-bit Steam ID
+     * @param steamId64 specified user's 64-bit Steam ID
+     * @return String containing user's "personaname"/display name
+     */
     public String getDisplayName(String steamId64) {
         String url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + API_KEY + "&steamids=" + steamId64;
         try {
@@ -44,6 +54,12 @@ public class APIRequest {
         return null;
     }
 
+    /**
+     * Gets the 64-bit SteamID for a specified user from their vanity url
+     * (e.g. "http://steamcommunity.com/id/system787" with "system787" being the part of the vanity url that is used)
+     * @param vanity
+     * @return
+     */
     public String get64FromVanity(String vanity) {
         String url = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + API_KEY + "&vanityurl=" + vanity.trim();
         try {
@@ -59,10 +75,20 @@ public class APIRequest {
         return null;
     }
 
+    /**
+     * Converts a 64-bit SteamID to 32 bit format
+     * @param steamId64 passed in as a String to be parsed
+     * @return 32-bit SteamID stored as a String
+     */
     public String convert64to32(String steamId64) {
         return String.valueOf(Long.parseLong(steamId64) - 76561197960265728L);
     }
 
+    /**
+     * Sends a JSON request to Steam API to query the last 25 matches played by the player.
+     * @param id64 the player's 64-bit SteamID
+     * @return ArrayList containing matchID objects.
+     */
     public ArrayList<MatchID> getLatest25Matches(String id64) {
         String id32 = convert64to32(id64);
         String url = "https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?account_id=" + id32 +  "&matches_requested=25&key=" + API_KEY;
@@ -96,6 +122,13 @@ public class APIRequest {
         return null;
     }
 
+    /**
+     *
+     * @param url request URL to send
+     * @param timeout length of time in milliseconds until the request is canceled
+     * @return a formatted JSON in String format
+     * @throws JSONException logged for each exception seen below
+     */
     public String getJSON(String url, int timeout) throws JSONException {
         HttpURLConnection c = null;
         try {

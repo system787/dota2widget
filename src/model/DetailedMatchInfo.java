@@ -11,6 +11,16 @@ public class DetailedMatchInfo {
     private boolean mRadiantVictory;
     private String mPlayerSlot;
 
+    /**
+     *
+     * @param mHero int[] with the format { heroNumber, level }
+     * @param mKDA int[] with the format { kill, death, assists }
+     * @param mCS int[] with the format { lastHits, denies }
+     * @param mXGPM int[] with the format { GPM, XPM }
+     * @param mRadiantVictory boolean true for radiant victory, false for dire
+     * @param mPlayerSlot 8-bit unsigned integer in a special format to denote player's team and player slot position within the team
+     *                    See https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails#Player_Slot
+     */
     public DetailedMatchInfo(int[] mHero, int[] mKDA, int[] mCS, int[] mXGPM, boolean mRadiantVictory, String mPlayerSlot) {
         this.mHero = mHero;
         this.mKDA = mKDA;
