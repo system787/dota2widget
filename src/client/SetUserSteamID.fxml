@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #20303B;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.SetUserSteamID">
+   <children>
+      <TextField fx:id="steamIdTF" layoutX="37.0" layoutY="87.0" prefHeight="36.0" prefWidth="328.0" promptText="Enter 64bit Steam Community ID or Profile Name" style="-fx-background-color: #506371; -fx-background-radius: 6px; -fx-text-fill: white;" />
+      <HBox alignment="CENTER" layoutX="101.0" layoutY="123.0" prefHeight="77.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="cancelButton" minWidth="80.0" mnemonicParsing="false" onMouseReleased="#cancel" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #506371; -fx-border-color: #506371;" text="Cancel" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="okButton" minWidth="80.0" mnemonicParsing="false" onMouseReleased="#setUserSteamID" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #506371; -fx-border-color: #506371;" text="Enter" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="descriptionLabel" alignment="CENTER" layoutX="36.0" layoutY="46.0" prefHeight="27.0" prefWidth="328.0" textFill="#dd2121">
+         <font>
+            <Font name="System Font" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
