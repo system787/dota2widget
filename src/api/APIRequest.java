@@ -21,11 +21,12 @@ import org.json.JSONObject;
  * For security reasons, this project does not include an API access key to use.
  * Compiling your own copy of this application will require a Steam Community API access key.
  * To get one, visit: https://steamcommunity.com/dev/apikey
- * Create a class named APIKey with a singular method named getAPIKey() that returns a String containing the APIKey.
+ * Create a class named APIKey with a method named getAPIKey() that returns a String containing the APIKey,
+ *  and another named getAPIDomain() to return the domain name as a String.
  */
 public class APIRequest {
     private static final String API_KEY = APIKey.getAPIKey();
-    private static final String API_DOMAIN = "systemdota";
+    private static final String API_DOMAIN = APIKey.getAPIDomain();
     private static final int REQUEST_TIMEOUT = 15000;
 
     public APIRequest() {}

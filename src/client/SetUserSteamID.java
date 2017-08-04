@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.SteamID;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +40,7 @@ public class SetUserSteamID {
         try {
             long steamId64 = Long.parseLong(steamId);
             String displayName = mClient.getDisplayName(steamId);
-            mController.addSteamID(steamId, displayName);
+            mController.addSteamID(new SteamID(steamId, displayName));
             return this;
         } catch (NumberFormatException e) {
             Logger.getLogger(getClass().getName()).log(Level.INFO, "SteamID is of type vanity. SteamID64 will be retrieved using vanity.");
@@ -48,7 +49,7 @@ public class SetUserSteamID {
         String steamId64 = mClient.get64FromVanity(steamId);
         if (steamId64 != null) {
             String displayName = mClient.getDisplayName(steamId64);
-            mController.addSteamID(steamId64, displayName);
+            mController.addSteamID(new SteamID(steamId64, displayName));
             return this;
         }
 

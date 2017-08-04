@@ -1,5 +1,6 @@
 package controller;
 
+import api.APIRequest;
 import database.DBModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by vincenthoang on 8/2/17.
  */
-public class Controller {
+public final class Controller {
     private static Controller mController;
 
     private static final String DB_NAME = "dota2widget.db";
@@ -30,7 +31,7 @@ public class Controller {
     private static final String MATCH_ID_FIELD_NAMES[] = {"id", "matchid", "lobbytype"};
     private static final String MATCH_ID_FIELD_TYPES[] = {"INTEGER PRIMARY KEY", "TEXT", "TEXT"};
     private DBModel mMatchID_DB;
-    private ObservableList<MatchID> matchIDObservableList;
+    private static ObservableList<MatchID> matchIDObservableList;
 
     private static final String ID_MATCH_TABLE = "id_match";
     private static final String ID_MATCH_FIELD_NAMES[] = {"steamid", "matchid"};
@@ -83,8 +84,8 @@ public class Controller {
         return mController;
     }
 
-    public static int addSteamID(String steamId, String displayName) {
-        String[] values = new String[]{steamId, displayName};
+    public static int addSteamID(SteamID steamId) {
+        String[] values = new String[]{steamId.getmID(), steamId.getmDisplayName()};
         try {
             mController.mSteamID_DB.createEntry(Arrays.copyOfRange(STEAM_ID_FIELD_NAMES, 1, STEAM_ID_FIELD_NAMES.length), values);
             return 1;
@@ -92,6 +93,19 @@ public class Controller {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static int retrieveLatest25Matches(String id64) {
+        APIRequest client = new APIRequest();
+        ArrayList<MatchID> temp = client.getLatest25Matches(id64);
+
+        for (MatchID match : matchIDObservableList) {
+            if (!matchIDObservableList.contains(match)) {
+                matchIDObservableList.add(match);
+            }
+        }
+
+        return 1;
     }
 
 }
