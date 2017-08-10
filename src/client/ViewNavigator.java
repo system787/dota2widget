@@ -2,6 +2,7 @@ package client;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class ViewNavigator {
         try {
             mainStage.setTitle(title);
             Scene scene = new Scene(FXMLLoader.load(ViewNavigator.class.getResource(sceneFXML)));
+            mainStage.getIcons().add(new Image("/assets/client/ico_32.png"));
             mainStage.setScene(scene);
             mainStage.show();
         } catch (IOException e) {
