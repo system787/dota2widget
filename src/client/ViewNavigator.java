@@ -13,9 +13,7 @@ import java.util.logging.Logger;
  * Created by vincenthoang on 8/3/17.
  */
 public class ViewNavigator {
-    public static final String SPLASH = "Splash.fxml";
     public static final String HOME = "Home.fxml";
-
     public static final String SETUSERSTEAMID = "SetUserSteamID.fxml";
 
     public static Stage mainStage;
@@ -32,7 +30,7 @@ public class ViewNavigator {
             mainStage.setScene(scene);
             mainStage.show();
         } catch (IOException e) {
-            Logger.getLogger("ViewNavigator").log(Level.SEVERE, "Loading new scene failed: " + title + ", " + sceneFXML, e);
+            Logger.getLogger("ViewNavigator").log(Level.SEVERE, "Loading new scene failed: " + title + ", " + sceneFXML + " " + e.getMessage(), e);
             e.printStackTrace();
         }
     }

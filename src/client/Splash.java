@@ -27,10 +27,10 @@ import javafx.util.Duration;
 public class Splash extends Application {
     private Controller mController;
 
-    private static final String SPLASH_IMAGE = "/assets/client/splash.png";
+    private static final String SPLASH_IMAGE = "/assets/client/splash_sm.png";
     private static final String APPLICATION_ICON = "/assets/client/ico_64.png";
-    private static final int SPLASH_WIDTH = 800;
-    private static final int SPLASH_HEIGHT = 600;
+    private static final int SPLASH_WIDTH = 500;
+    private static final int SPLASH_HEIGHT = 375;
 
     private Pane splashPane;
     private ImageView splashImage;
@@ -72,7 +72,11 @@ public class Splash extends Application {
      * Adjust the progress bar and fade time as necessary in showSplash() below
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(final Stage primaryStage) throws Exception {
+
+        // Setting stage for ViewNavigator to prevent NullPointerException
+        ViewNavigator.setStage(primaryStage);
+
         final Task<Controller> initializeTask = new Task<Controller>() {
             @Override
             protected Controller call() throws InterruptedException {
@@ -87,6 +91,7 @@ public class Splash extends Application {
                 () -> ViewNavigator.loadScene("Dota 2 Widget", ViewNavigator.HOME));
         new Thread(initializeTask).start();
     }
+
 
     public interface InitCompletionHandler {
         void complete();
